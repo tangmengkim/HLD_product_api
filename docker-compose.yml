@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  node-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: node_app
+    restart: always
+    ports:
+      - "3000:3000" # Map port 3000 of the container to the host
+    depends_on:
+      - sql-server
+    environment:
+      DB_HOST: ${SQL_NAME}
+      DB_USER: ${MSSQL_NAME}
+      DB_PASSWORD: ${MSSQL_PASSWORD}
+      DB_NAME: ${MSSQL_DATABASE}
+
+  sql-server:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: ${SQL_NAME}
+    restart: always
+    ports:
+      - "1433:1433" # Expose SQL Server on default port
+    environment:
+      ACCEPT_EULA: ${ACCEPT_EULA}
+      SA_PASSWORD: ${MSSQL_PASSWORD}
+      MSSQL_PID: ${MSSQL_PID}
