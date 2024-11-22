@@ -31,8 +31,8 @@ services:
       ACCEPT_EULA: ${ACCEPT_EULA}
       SA_PASSWORD: ${MSSQL_PASSWORD}
       MSSQL_PID: ${MSSQL_PID}
-    volumes:
-      - sqlserver_data:/var/opt/mssql
+    # volumes:
+    #   - sqlserver_data:/var/opt/mssql
 
   cloudflared:
     image: cloudflare/cloudflared:latest
@@ -49,5 +49,5 @@ services:
 networks:
   app_network:
     driver: bridge
-volumes:
-  sqlserver_data:
+# volumes:
+#   sqlserver_data:
