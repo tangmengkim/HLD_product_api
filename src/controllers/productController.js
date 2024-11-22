@@ -25,9 +25,9 @@ const productService = require('../services/productService')
 
 const getTop = async (req, res) => {
     try {
-
+        const {limit = 5} = req.body
         const products = await Product.findAll({
-            limit: 5, // Limit to top 5
+            limit: limit, // Limit to top 5
             order: [['updatedAt', 'DESC']], // Sort by updatedAt in descending order
 
         });
