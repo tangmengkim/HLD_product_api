@@ -1,9 +1,18 @@
-const { Sequelize } = require('sequelize');
-require('dotenv').config();
+const { PostgresDialect } = require("@sequelize/postgres");
+const { Sequelize } = require("sequelize");
+require("dotenv").config();
 
-const sequelize = new Sequelize(process.env.MSSQL_DATABASE, process.env.MSSQL_NAME, process.env.MSSQL_PASSWORD, {
-  host: process.env.MSSQL_HOST,
-  dialect: 'mssql',
-});
+const sequelize = new Sequelize(
+  process.env.MSSQL_DATABASE,
+  process.env.MSSQL_NAME,
+  process.env.MSSQL_PASSWORD,
+  {
+    host: process.env.MSSQL_HOST,
+    dialect: PostgresDialect,
+    port: 5432,
+    ssl: true,
+    clientMinMessages: 'notice'
+  }
+);
 
 module.exports = sequelize;

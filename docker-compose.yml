@@ -18,22 +18,6 @@ services:
       DB_PASSWORD: ${MSSQL_PASSWORD}
       DB_NAME: ${MSSQL_DATABASE}
 
-  sql-server:
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: ${SQL_NAME}
-    restart: always
-    platform: "linux/amd64"
-    networks:
-      - app_network
-    ports:
-      - "1433:1433" # Expose SQL Server on default port
-    environment:
-      ACCEPT_EULA: ${ACCEPT_EULA}
-      SA_PASSWORD: ${MSSQL_PASSWORD}
-      MSSQL_PID: ${MSSQL_PID}
-    volumes:
-      - sqlserver_data:/var/opt/mssql
-
   cloudflared:
     image: cloudflare/cloudflared:latest
     container_name: cloudflare_tunnel
@@ -49,6 +33,3 @@ services:
 networks:
   app_network:
     driver: bridge
-volumes:
-  sqlserver_data:
-    driver: local
