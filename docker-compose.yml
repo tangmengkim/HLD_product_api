@@ -8,8 +8,6 @@ services:
     restart: always
     ports:
       - "3000:143" # Map port 3000 of the container to the host
-    depends_on:
-      - sql-server
     networks:
       - app_network
     environment:
@@ -27,7 +25,6 @@ services:
       TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN}
     depends_on:
       - node-app
-      - sql-server
     networks:
       - app_network
 networks:
